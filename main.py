@@ -17,7 +17,7 @@ def fetch_spacex():
     for number, link in enumerate(links):
         file_name = 'spacex_photo'
         file_path = os.path.join('images', file_name)
-        
+
 
 fetch_spacex()
 
