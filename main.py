@@ -15,9 +15,9 @@ def fetch_spacex():
     response.raise_for_status()
     links = response.json()['links']['flickr']['original']
     for number, link in enumerate(links):
-        file_name = 'spacex_photo'
+        file_name = f'spacex_photo{number}.jpg'
         file_path = os.path.join('images', file_name)
-
+        download_image(link, file_path)
 
 fetch_spacex()
 
