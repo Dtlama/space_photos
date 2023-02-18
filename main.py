@@ -1,6 +1,12 @@
+from urllib.parse import urlparse
 import requests
 import os
 
+
+def get_file_extension(url):
+    parsed_url = urlparse(url)
+    split_text = os.path.splitext(parsed_url.path)
+    return split_text[1]
 
 def download_image(url, file_path):
     response = requests.get(url)
@@ -20,5 +26,6 @@ def fetch_spacex():
         download_image(link, file_path)
 
 fetch_spacex()
+get_file_extension('https://apod.nasa.gov/apod/image/2302/JWSTMIRI_ngc1365_1024.png')
 
 os.makedirs('images', exist_ok=True)
