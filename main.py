@@ -20,7 +20,6 @@ def download_image(url, file_path, payload=None):
 
 if __name__ == '__main__':
     load_dotenv()
+    key = os.environ["API_KEY"]
     os.makedirs('images', exist_ok=True)
     get_file_extension('https://apod.nasa.gov/apod/image/2302/JWSTMIRI_ngc1365_1024.png')
-
-    key = os.environ["API_KEY"]
