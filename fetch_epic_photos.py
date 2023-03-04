@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from main import download_image
+from image_tools import download_image
 import requests
 import datetime
 import os

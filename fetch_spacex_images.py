@@ -1,4 +1,4 @@
-from main import download_image
+from image_tools import download_image
 import requests
 import os
 

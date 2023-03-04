@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
-from main import download_image
-from main import get_file_extension
+from image_tools import download_image
+from image_tools import get_file_extension
 import requests
 import os
 
