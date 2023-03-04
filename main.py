@@ -57,10 +57,12 @@ def fetch_epic_photos(key):
         file_path = os.path.join('images', f'{image_name}.png')
         download_image(image_link, file_path, payload=payload)
 
-os.makedirs('images', exist_ok=True)
-#fetch_spacex()
-get_file_extension('https://apod.nasa.gov/apod/image/2302/JWSTMIRI_ngc1365_1024.png')
 
-key = os.environ["API_KEY"]
-#fetch_nasa_apod(key)
-fetch_epic_photos(key)
+if __name__ == '__main__':
+    os.makedirs('images', exist_ok=True)
+    fetch_spacex()
+    get_file_extension('https://apod.nasa.gov/apod/image/2302/JWSTMIRI_ngc1365_1024.png')
+
+    key = os.environ["API_KEY"]
+    fetch_nasa_apod(key)
+    fetch_epic_photos(key)
