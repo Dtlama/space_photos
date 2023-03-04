@@ -2,7 +2,7 @@ from urllib.parse import urlparse
 from dotenv import load_dotenv
 import requests
 import os
-import pprint
+import datetime
 
 
 load_dotenv()
@@ -12,8 +12,8 @@ def get_file_extension(url):
     split_text = os.path.splitext(parsed_url.path)
     return split_text[1]
 
-def download_image(url, file_path):
-    response = requests.get(url)
+def download_image(url, file_path, payload=None):
+    response = requests.get(url, params=payload)
     response.raise_for_status()
 
     with open(file_path, 'wb') as file:
@@ -35,7 +35,6 @@ def fetch_nasa_apod(key):
     response = requests.get(url, params=payload)
     response.raise_for_status()
     links = response.json()
-    pprint.pprint(links)
     for number, image in enumerate(links):
         if image["media_type"] != "image":
             continue
@@ -49,7 +48,14 @@ def fetch_epic_photos(key):
     response = requests.get(url, params=payload)
     response.raise_for_status()
     photos = response.json()
-    pprint.pprint(photos)
+    for photo in photos:
+        image_name = photo['image']
+        image_date = photo['date']
+        image_date = datetime.datetime.fromisoformat(image_date)
+        image_date=image_date.strftime('%Y/%m/%d')
+        image_link = f'https://api.nasa.gov/EPIC/archive/natural/{image_date}/png/{image_name}.png?api_key={key}'
+        file_path = os.path.join('images', f'{image_name}.png')
+        download_image(image_link, file_path, payload=payload)
 
 os.makedirs('images', exist_ok=True)
 #fetch_spacex()
